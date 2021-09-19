@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--    Bootstrap CSS   -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!--    My CSS   -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>SimonWalker.Tech</title>
+</head>
+<body class="text-center">
+
+
+<!-- controls nav bar -->
+<nav id="controls" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark show fade" style="margin: 0">
+    <div class="container-fluid">
+        <button type="button" class="btn-close btn-close-white" style="margin-right: 40px" aria-label="Close"
+                onclick="(() => {
+                    document.getElementById('controls').classList.replace('show', 'hide')
+                })()">
+        </button>
+
+        <a class="navbar-brand" href="#">SimonWalker.Tech</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0" style="padding-left: 10%; padding-right: 10%">
+                <li class="nav-item">
+                    <label for="bubbleRate" class="form-label text-white">Speed</label>
+                    <input id="bubbleRate" type="range" class="form-range" min="0" max="150">
+                </li>
+                <li class="nav-item">
+                    <label for="zoom" class="form-label text-white">Zoom</label>
+                    <input id="zoom" type="range" class="form-range" min="0.1" max="70">
+                </li>
+                <li class="nav-item">
+                    <label for="distortionZoom" class="form-label text-white">Distortion Zoom</label>
+                    <input id="distortionZoom" type="range" class="form-range" min=".1" max="2" step=".1">
+                </li>
+                <li class="nav-item">
+                    <label for="distortionStrength" class="form-label text-white">Distortion Strength</label>
+                    <input id="distortionStrength" type="range" class="form-range" min="0" max="100">
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="fullScreen" style="z-index: 0">
+    <canvas id="canvas" class="fullScreen"></canvas>
+</div>
+
+
+
+<script>
+    //  make it so that clicking in the middle of the screen shows the nav bar
+    document.getElementById('canvas').addEventListener('click', () => {
+        document.getElementById('controls').classList.replace('hide', 'show')
+    });
+</script>
+
+
+<!--     My Scripts       -->
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+</script>
+
+<script src="bundledDependencies.js"></script>
+<script src="parameters.js"></script>
+<script src="animate.js"></script>
+<script src="canvasBeingDraggedEvent.js"></script>
+
+<!--     Bootstrap Scripts       -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+
+</body>
+</html>

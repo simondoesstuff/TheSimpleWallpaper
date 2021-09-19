@@ -1,10 +1,11 @@
 const resolutionCoefficient = .15;   // temporary performance fix
+// const resolutionCoefficient = 1;   // temporary performance fix
 
 // default values
-let bubbleRate = 150;  // (points / sec)                - [0, 150]
-let zoom = 50;                          //              - [.1, 70]
-let distortionZoom = 0.5;               //              - [.1, 2]
-let distortionStrength = 15;   // maximum pixel offset  - [0, 100]
+let bubbleRate = 30;  // (points / sec)                - [0, 150]
+let zoom = 40;                          //              - [.1, 70]
+let distortionZoom = 0.7;               //              - [.1, 2]
+let distortionStrength = 30;   // maximum pixel offset  - [0, 100]
 
 (() => {
     let eBubbleRate = document.getElementById('bubbleRate');
