@@ -1,0 +1,8 @@
+{
+  "name": "AnimatedSimplexWallpaperSite",
+  "version": "1.0.0",
+  "dependencies": {
+    "fast-simplex-noise": "^4.0.0",
+    "watchify": "^4.0.0"
+  }
+}
