@@ -3,6 +3,7 @@ const noiseApi = window.modules.noiseApi;
 
 // -------------------------------------------------
 
+// parameters are pulled in from parameters.js
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
