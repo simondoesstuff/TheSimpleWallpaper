@@ -29,15 +29,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0" style="padding-left: 10%; padding-right: 10%">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <label for="bubbleRate" class="form-label text-white">Speed</label>
+                    <input id="bubbleRate" type="range" class="form-range" min="0" max="150">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <label for="zoom" class="form-label text-white">Zoom</label>
+                    <input id="zoom" type="range" class="form-range" min="0.1" max="70">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <label for="distortionZoom" class="form-label text-white">Distortion Detail</label>
+                    <input id="distortionZoom" type="range" class="form-range" min=".1" max="2" step=".1">
+                </li>
+                <li class="nav-item">
+                    <label for="distortionStrength" class="form-label text-white">Distortion Strength</label>
+                    <input id="distortionStrength" type="range" class="form-range" min="0" max="100">
                 </li>
             </ul>
         </div>
@@ -50,6 +57,7 @@
 
 <!--     My Scripts       -->
 <script src="bundledDependencies.js"></script>
+<script src="parameters.js"></script>
 <script src="animate.js"></script>
 
 <!--     Bootstrap Scripts       -->

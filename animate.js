@@ -4,13 +4,6 @@ const noiseApi = window.modules.noiseApi;
 // -------------------------------------------------
 
 
-const bubbleRate = 150;  // (points / sec)
-const resolutionCoefficient = .15;   // temporary performance fix
-const zoom = 50;
-const distortionZoom = .3 * zoom;
-const distortionStrength = 15;   // maximum pixel offset
-
-
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -104,7 +97,7 @@ function update() {
         x += update.userOffset.x;
         y += update.userOffset.y;
 
-        let distortionTransformedCords = transform(distortionZoom, x, y, update.bubbleOffset);
+        let distortionTransformedCords = transform(distortionZoom * zoom, x, y, update.bubbleOffset);
         let distortion = noiseB(distortionTransformedCords[0], distortionTransformedCords[1], distortionTransformedCords[2]) * distortionStrength;
 
         x += distortion;
