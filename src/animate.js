@@ -37,8 +37,37 @@ let noiseB = (() => {
 })();
 
 
+/**
+ * Find the value between two values.
+ * Useful for smoothing.
+ *
+ * @param a Number
+ * @param b Number
+ * @param speed [0, 1]
+ */
 function lerp(a, b, speed) {
     return a + speed * (b - a);
+}
+
+
+/**
+ * Finds the vector between two vectors.
+ * The input vectors must match.
+ * @param a an array of any length
+ * @param b an array of any length
+ * @param speed [0, 1]
+ */
+function arrayLerp(a, b, speed) {
+    if (a.length !== b.length)
+        throw "The input vector lengths do not match.";
+
+    let result = [];
+
+    for (let i = 0; i < a.length; i++) {
+        result.push(lerp(a[i], b[i], speed));
+    }
+
+    return result;
 }
 
 
@@ -71,27 +100,48 @@ function transform(zoom) {
 
 
 
-// todo remove
-let c = [
-    // 40, 220, 250
-    Math.random() * 155 + 100,
-    Math.random() * 155 + 100,
-    Math.random() * 155 + 100
-];
+(() => {
+    renderNoise.cGrad = [
+        [
+            // light color
+            Math.random() * 85 + 170,
+            Math.random() * 85 + 170,
+            Math.random() * 85 + 170
+        ], [
+            // dark color
+            Math.random() * 85,
+            Math.random() * 85,
+            Math.random() * 85
+        ]
+    ];
+
+    // coin flip to flip light and dark color
+    if (Math.random() > .5) {
+        let temp = renderNoise.cGrad[0];
+        renderNoise.cGrad[0] = renderNoise.cGrad[1];
+        renderNoise.cGrad[1] = temp;
+    }
+})()
 
 function renderNoise(generateFun) {
     let newData = ctx.createImageData(canvas.width, canvas.height);
     let pixels = newData.data;
+
+    const c1 = renderNoise.cGrad[0];
+    const c2 = renderNoise.cGrad[1];
 
     for (let i = 0; i < newData.data.length; i += 4) {
         let {x, y} = getCords(i);
         let noiseValue = generateFun(x, y);
         let degree = noiseValue / 2 + .5;   // wrap to [0-1]
 
-        pixels[i] = c[0] * degree;
-        pixels[i + 1] = c[1] * degree;
-        pixels[i + 2] = c[2] * degree;
-        pixels[i + 3] = 255;
+        let color = arrayLerp(c1, c2, degree);
+
+        pixels[i]       = color[0];
+        pixels[i + 1]   = color[1];
+        pixels[i + 2]   = color[2];
+
+        pixels[i + 3]   = 255;
     }
 
     ctx.putImageData(newData, 0, 0);
