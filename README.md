@@ -16,9 +16,12 @@ The "bubbling" effect is produced by applying 3D noise to the screen where the t
 
 These additions may or may not be added.
 
-- [ ] Custom gradient coloring
+- [x] Colored background
+  - [x] Random gradient color (with at least 2 colors)
+  - [ ] Custom gradient coloring
   - [ ] Third gradient color
 - [ ] Dropdown control to change either of the nosie algorithms (cellular would be awesome)
+- [x] Panning
 
 ### UI Enhancements
 
@@ -26,6 +29,8 @@ These additions may or may not be added.
   - [ ] The slider bars are a little janky when raised to the inline section.
 - [ ] GitHub Repo Link Icon
 - [ ] Box to type in exact values for slider bars
+- [x] Navbar close button
+  - [x] Reappear navbar by clicking on canvas
 
 ### Performance Updates
 
