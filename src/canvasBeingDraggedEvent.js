@@ -18,9 +18,11 @@
         // };
 
         const deltaPos = {
-            x: event.screenX,
-            y: event.screenY
+            x: event.offsetX,
+            y: event.offsetY
         }
+
+        console.log(`drag: {${JSON.stringify({x: event.screenX, y: event.screenY}, null, 1)}`)
 
         previousPosition.x += deltaPos.x;
         previousPosition.y += deltaPos.y;
