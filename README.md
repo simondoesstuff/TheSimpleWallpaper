@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
+# The Simple Wallpaper
 
-You can use the [editor on GitHub](https://github.com/simondoesstuff/TheSimpleWallpaper/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+The **simplex**st wallpaper around! A fun, interactive visualization of coherent noise.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+---
 
-### Markdown
+## How It Works
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Two noise layers are calculated to make up the image each frame. The first layer acts as an offset to the inputs of the second layer creating an effect analagous to refraction of light. Each noise layer can be scaled, twisted, and animated separately.
 
-```markdown
-Syntax highlighted code block
+The "bubbling" effect is produced by applying 3D noise to the screen where the the third dimension is time. Imagine taking slices off a block of cheese repeatedly.
 
-# Header 1
-## Header 2
-### Header 3
+## The Future
 
-- Bulleted
-- List
+### Visual Features
 
-1. Numbered
-2. List
+These additions may or may not be added.
 
-**Bold** and _Italic_ and `Code` text
+- [ ] Custom gradient coloring
+  - [ ] Third gradient color
+- [ ] Dropdown control to change either of the nosie algorithms (cellular would be awesome)
 
-[Link](url) and ![Image](src)
-```
+### UI Enhancements
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- [ ] Navbar Improvements
+  - [ ] The slider bars are a little janky when raised to the inline section.
+- [ ] GitHub Repo Link Icon
+- [ ] Box to type in exact values for slider bars
 
-### Jekyll Themes
+### Performance Updates
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/simondoesstuff/TheSimpleWallpaper/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+The **pixelation** is put in intentionally to increase performance. The pixelation allows for multiple pixels to be computed with a single noise computation step. I hope to improve the performance to the point where the pixelation can be removed entirely without any performance degredation.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- [ ] Install WASM for noise computation
+- [ ] Break into chunks with service workers
