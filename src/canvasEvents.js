@@ -2,7 +2,7 @@
     let dragInProgress = 0;
 
 
-    function startDrag(event) {
+    function startDrag() {
         dragInProgress = 1;
     }
 
@@ -28,7 +28,7 @@
     }
 
 
-    function endDrag(event) {
+    function endDrag() {
         if (dragInProgress === 1) {
             document.getElementById('controls').classList.replace('hide', 'show')
         }
@@ -42,8 +42,8 @@
     // ---------------------------------------------------
 
 
-    canvas.addEventListener('mousedown', event => startDrag(event))
-    canvas.addEventListener('mouseup', event => endDrag(event))
-    canvas.addEventListener('mouseout', event => endDrag(event))
-    canvas.addEventListener('mousemove', event => persistDrag(event))
+    canvas.addEventListener('mousedown', event => startDrag(event));
+    canvas.addEventListener('mouseup', event => endDrag(event));
+    canvas.addEventListener('mouseout', event => endDrag(event));
+    canvas.addEventListener('mousemove', event => persistDrag(event));
 })();
