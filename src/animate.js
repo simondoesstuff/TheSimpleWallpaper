@@ -37,6 +37,11 @@ let noiseB = (() => {
 })();
 
 
+function lerp(a, b, speed) {
+    return a + speed * (b - a);
+}
+
+
 function getCords(i) {
     i = Math.floor(i / 4);
     let x = i % canvas.width;
@@ -65,16 +70,18 @@ function transform(zoom) {
 }
 
 
+
+// todo remove
+let c = [
+    // 40, 220, 250
+    Math.random() * 155 + 100,
+    Math.random() * 155 + 100,
+    Math.random() * 155 + 100
+];
+
 function renderNoise(generateFun) {
     let newData = ctx.createImageData(canvas.width, canvas.height);
     let pixels = newData.data;
-
-    let c = [
-        180, 10, 150
-        // Math.random() * 200,
-        // Math.random() * 200,
-        // Math.random() * 200
-    ];
 
     for (let i = 0; i < newData.data.length; i += 4) {
         let {x, y} = getCords(i);
@@ -93,12 +100,16 @@ function renderNoise(generateFun) {
 
 
 function update() {
-    let deltaTime = Date.now() - update.time;
+    const deltaTime = Date.now() - update.time;
+    const deltaTimePercent = Date.now() / update.time;
     update.time += deltaTime;
 
     let deltaOffset = bubbleRate / 1000 * deltaTime;
     update.bubbleOffset += deltaOffset;
 
+    const adjustOffset = (a, b) => lerp(a, b * panAcceleration, panSmoothing * deltaTimePercent);
+    update.offset.x = adjustOffset(update.offset.x, userOffset.x);
+    update.offset.y = adjustOffset(update.offset.y, userOffset.y);
 
     /**
      * Algorithm:
@@ -110,11 +121,11 @@ function update() {
      *  layer 2 noise value is rendered
      */
     renderNoise((x, y) => {
-        // x -= userOffset.x * resolutionCoefficient;
-        // y -= userOffset.y * resolutionCoefficient;
-
         let layer1Cords = transform(distortionZoom * zoom, x, y, update.bubbleOffset);
         let layer1Noise = noiseB(layer1Cords[0], layer1Cords[1], layer1Cords[2]) * distortionStrength;
+
+        x += update.offset.x * resolutionCoefficient;
+        y += update.offset.y * resolutionCoefficient;
 
         x += layer1Noise;
         y += layer1Noise;
@@ -125,6 +136,7 @@ function update() {
         return layer2Noise;
     });
 }
+update.offset = {x: 0, y: 0};
 update.bubbleOffset = 0;
 update.time = Date.now();
 

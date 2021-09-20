@@ -1,31 +1,22 @@
 (() => {
-    let previousPosition = null;
+    let dragInProgress = 0;
 
 
     function startDrag(event) {
-        const {clientX: x, clientY: y} = event;
-
-        previousPosition = {x, y};
+        dragInProgress = 1;
     }
 
     function persistDrag(event) {
-        if (!previousPosition) return;
+        if (!dragInProgress) return;
 
-        // const { clientX: x, clientY: y } = event;
-        // const deltaPos = {
-        //     x: x - previousPosition.x,
-        //     y: y - previousPosition.y
-        // };
+        dragInProgress = 2;
 
         const deltaPos = {
-            x: event.offsetX,
-            y: event.offsetY
+            x: event.movementX,
+            y: event.movementY
         }
 
-        console.log(`drag: {${JSON.stringify({x: event.screenX, y: event.screenY}, null, 1)}`)
-
-        previousPosition.x += deltaPos.x;
-        previousPosition.y += deltaPos.y;
+        console.log(`drag: {${JSON.stringify({x: deltaPos.x, y: deltaPos.y}, null, 1)}`)
 
         const newEvent = new CustomEvent('canvasBeingDragged', {
             detail: {
@@ -38,7 +29,11 @@
     }
 
     function endDrag(event) {
-        previousPosition = null;
+        // this will prevent the clicking event in the case of dragging
+        if (dragInProgress !== 1)
+            event.preventDefault();
+
+        dragInProgress = 0;
     }
 
 
@@ -51,4 +46,8 @@
     canvas.addEventListener('mouseup', event => endDrag(event))
     canvas.addEventListener('mouseout', event => endDrag(event))
     canvas.addEventListener('mousemove', event => persistDrag(event))
+
+    canvas.addEventListener('click', event => {
+        console.log(`canvas click: (${event.movementX}, ${event.movementY})`)
+    })
 })();
